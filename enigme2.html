@@ -17,6 +17,8 @@
       justify-content: center;
       min-height: 100vh;
       text-align: center;
+      padding: 20px;
+      position: relative;
     }
 
     h1 {
@@ -50,6 +52,7 @@
       font-weight: 600;
       cursor: pointer;
       transition: background-color 0.3s;
+      margin: 5px;
     }
 
     button:hover {
@@ -66,30 +69,43 @@
       margin-top: 10px;
     }
 
+    #indice {
+      margin-top: 15px;
+      font-style: italic;
+      color: #8b1a1a;
+      display: none;
+      max-width: 600px;
+    }
+
     footer {
       position: absolute;
       bottom: 20px;
       font-size: 0.9em;
       color: #aaa;
+      width: 100%;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <h1>Énigme 2</h1>
-  <p>Devine la bonne réponse à cette énigme romantique :</p>
-  <p><em>[Mettre ici le texte de l'énigme]</em></p>
+  <p>Devine le nombre de jours qui nous séparent</p>
+  <p><em>Combien de jours nous séparent ?</em></p>
 
   <input type="text" id="reponse" placeholder="Ta réponse..." />
   <br />
   <button onclick="verifierReponse()">Valider</button>
+  <button onclick="afficherIndice()">Afficher un indice</button>
   <div id="message" class="error"></div>
+
+  <p id="indice">L'indicatif téléphonique international de la Macédoine du Nord.</p>
 
   <footer>Tu progresses petit à petit vers la récompense...</footer>
 
   <script>
     function verifierReponse() {
-      const bonneReponse = "ok"; // à personnaliser
-      const saisie = document.getElementById("reponse").value.trim().toLowerCase();
+      const bonneReponse = "389"; // à personnaliser
+      const saisie = document.getElementById("reponse").value.trim();
       const message = document.getElementById("message");
 
       if (saisie === bonneReponse) {
@@ -102,6 +118,15 @@
       } else {
         message.className = "error";
         message.textContent = "Essaie encore... 🧐";
+      }
+    }
+
+    function afficherIndice() {
+      const indice = document.getElementById("indice");
+      if (indice.style.display === "none") {
+        indice.style.display = "block";
+      } else {
+        indice.style.display = "none";
       }
     }
   </script>

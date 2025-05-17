@@ -17,6 +17,8 @@
       justify-content: center;
       min-height: 100vh;
       text-align: center;
+      padding: 20px;
+      position: relative;
     }
 
     h1 {
@@ -27,18 +29,27 @@
     }
 
     p {
-      font-size: 1.1em;
-      margin-bottom: 25px;
-      max-width: 600px;
-      color: #555;
+      font-size: 1.15em;
+      margin-bottom: 30px;
+      max-width: 700px;
+      color: #5a2a2a;
+      line-height: 1.6;
+      background: rgba(255, 228, 225, 0.7);
+      padding: 20px 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(178, 34, 34, 0.3);
+      border: 1px solid #d99a9a;
+      text-align: left;
     }
 
     input[type="text"] {
       padding: 12px;
-      width: 250px;
+      width: 280px;
       border-radius: 8px;
       border: 1px solid #ccc;
       margin-bottom: 20px;
+      font-size: 1.1em;
+      text-align: center;
     }
 
     button {
@@ -50,6 +61,8 @@
       font-weight: 600;
       cursor: pointer;
       transition: background-color 0.3s;
+      margin: 5px;
+      font-size: 1em;
     }
 
     button:hover {
@@ -59,11 +72,25 @@
     .error {
       color: red;
       margin-top: 10px;
+      font-weight: 600;
     }
 
     .success {
       color: green;
       margin-top: 10px;
+      font-weight: 600;
+    }
+
+    #indice {
+      margin-top: 15px;
+      font-style: italic;
+      color: #8b1a1a;
+      max-width: 700px;
+      display: none;
+      background: rgba(255, 228, 225, 0.9);
+      padding: 15px 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(178, 34, 34, 0.25);
     }
 
     footer {
@@ -71,30 +98,40 @@
       bottom: 20px;
       font-size: 0.9em;
       color: #aaa;
+      width: 100%;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <h1>Énigme 4</h1>
-  <p>Devine la bonne réponse à cette énigme romantique :</p>
-  <p><em>[Mettre ici le texte de l'énigme]</em></p>
+  <p>
+    Pars de ton année de naissance. <br />Je commence par la multiplier par 1000, puis j'ajoute 18, puis 5, et je multiplie le tout par 9000.<br />
+    Ensuite, je retranche 162000000. Puis j'ajoute 1000.<br />
+    Je retranche encore 25000, puis 500.<br />
+    Enfin, je finis en ajoutant mon année de naissance.<br />
+    Quel est donc mon nombre préféré ?
+  </p>
 
-  <input type="text" id="reponse" placeholder="Ta réponse..." />
+  <input type="text" id="reponse" placeholder="Ta réponse (format nombre)..." />
   <br />
   <button onclick="verifierReponse()">Valider</button>
+  <button onclick="afficherIndice()">Afficher un indice</button>
+
   <div id="message" class="error"></div>
+  <div id="indice">Bah alors, on veut pas calculer ?</div>
 
   <footer>Tu progresses petit à petit vers la récompense...</footer>
 
   <script>
     function verifierReponse() {
-      const bonneReponse = "ok"; // à personnaliser
-      const saisie = document.getElementById("reponse").value.trim().toLowerCase();
+      const bonneReponse = "18052002"; 
+      const saisie = document.getElementById("reponse").value.trim();
       const message = document.getElementById("message");
 
       if (saisie === bonneReponse) {
         const progress = JSON.parse(localStorage.getItem('progress')) || {};
-        progress['enigme4'] = true; // remplace X par le numéro
+        progress['enigme4'] = true; 
         localStorage.setItem('progress', JSON.stringify(progress));
         message.className = "success";
         message.textContent = "Bonne réponse ! Redirection...";
@@ -102,6 +139,15 @@
       } else {
         message.className = "error";
         message.textContent = "Essaie encore... 🧐";
+      }
+    }
+
+    function afficherIndice() {
+      const indice = document.getElementById("indice");
+      if (indice.style.display === "none" || indice.style.display === "") {
+        indice.style.display = "block";
+      } else {
+        indice.style.display = "none";
       }
     }
   </script>

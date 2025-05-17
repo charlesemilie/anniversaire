@@ -17,6 +17,8 @@
       justify-content: center;
       min-height: 100vh;
       text-align: center;
+      padding: 20px;
+      position: relative;
     }
 
     h1 {
@@ -24,6 +26,15 @@
       font-size: 2.8em;
       color: #b22222;
       margin-bottom: 20px;
+    }
+
+    img {
+      max-width: 320px;
+      width: 90vw;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(178, 34, 34, 0.4);
+      margin-bottom: 25px;
+      user-select: none;
     }
 
     p {
@@ -50,6 +61,7 @@
       font-weight: 600;
       cursor: pointer;
       transition: background-color 0.3s;
+      margin: 5px;
     }
 
     button:hover {
@@ -66,43 +78,64 @@
       margin-top: 10px;
     }
 
+    #indice {
+      margin-top: 15px;
+      font-style: italic;
+      color: #8b1a1a;
+      display: none;
+      max-width: 600px;
+    }
+
     footer {
       position: absolute;
       bottom: 20px;
       font-size: 0.9em;
       color: #aaa;
+      width: 100%;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <h1>Énigme 5</h1>
-  <p>Devine la bonne réponse à cette énigme romantique :</p>
-  <p><em>[Mettre ici le texte de l'énigme]</em></p>
 
-  <input type="text" id="reponse" placeholder="Ta réponse..." />
+  <img src="images/image5.jpg" alt="Image énigme 5" />
+
+  <p>Complète cette phrase :</p>
+  <p><em>"ooooooh les p'tites ..."</em></p>
+
+  <input type="text" id="reponse" placeholder="Ta réponse..." autocomplete="off" />
   <br />
   <button onclick="verifierReponse()">Valider</button>
+  <button onclick="afficherIndice()">Afficher un indice</button>
   <div id="message" class="error"></div>
+
+  <p id="indice">T'as pas honte ?</p>
 
   <footer>Tu progresses petit à petit vers la récompense...</footer>
 
   <script>
     function verifierReponse() {
-      const bonneReponse = "ok"; // à personnaliser
+      const bonneReponse = "bouclettes";
       const saisie = document.getElementById("reponse").value.trim().toLowerCase();
       const message = document.getElementById("message");
 
       if (saisie === bonneReponse) {
         const progress = JSON.parse(localStorage.getItem('progress')) || {};
-        progress['enigme5'] = true; // remplace X par le numéro
+        progress['enigme5'] = true;
         localStorage.setItem('progress', JSON.stringify(progress));
         message.className = "success";
-        message.textContent = "Bonne réponse ! Redirection...";
+        message.textContent = "Bravo, c'est la bonne réponse ! Redirection...";
         setTimeout(() => window.location.href = "accueil.html", 1500);
       } else {
         message.className = "error";
-        message.textContent = "Essaie encore... 🧐";
+        message.textContent = "Essaie encore... 😉";
       }
+    }
+
+    function afficherIndice() {
+      const indice = document.getElementById("indice");
+      indice.style.display = indice.style.display === "none" ? "block" : "none";
     }
   </script>
 </body>

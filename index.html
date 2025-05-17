@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bienvenue ❤️</title>
+  <title>Joyeux anniversaire ❤️</title>
   <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -17,6 +17,18 @@
       justify-content: center;
       min-height: 100vh;
       text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    img.photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(178, 34, 34, 0.5);
+      margin-bottom: 20px;
+      border: 3px solid #b22222;
     }
 
     h1 {
@@ -30,6 +42,7 @@
       font-size: 1.2em;
       margin-bottom: 30px;
       color: #555;
+      max-width: 320px;
     }
 
     input[type="password"] {
@@ -37,7 +50,7 @@
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 1em;
-      width: 250px;
+      width: 260px;
       margin-bottom: 20px;
     }
 
@@ -60,6 +73,7 @@
     .error {
       color: red;
       margin-top: 15px;
+      min-height: 20px;
     }
 
     footer {
@@ -67,12 +81,14 @@
       bottom: 20px;
       font-size: 0.9em;
       color: #aaa;
+      user-select: none;
     }
   </style>
 </head>
 <body>
-  <h1>Bienvenue ❤️</h1>
-  <p>Entre le mot de passe pour commencer notre aventure...</p>
+  <img src="images/image3.jpg" alt="photo" class="photo" />
+  <h1>Joyeux anniversaire ❤️</h1>
+  <p>Entre le mot de passe pour commencer l'aventure...</p>
   <input type="password" id="passwordInput" placeholder="Mot de passe secret" />
   <br />
   <button onclick="verifierMotDePasse()">Entrer</button>
@@ -85,7 +101,7 @@
       const mdp = document.getElementById("passwordInput").value;
       const message = document.getElementById("errorMessage");
 
-      if (mdp === "test") { // à personnaliser
+      if (mdp === "test") { // à personnaliser avec ton vrai mot de passe
         window.location.href = "accueil.html";
       } else {
         message.textContent = "Mot de passe incorrect 😢";

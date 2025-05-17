@@ -17,6 +17,8 @@
       justify-content: center;
       min-height: 100vh;
       text-align: center;
+      padding: 20px;
+      position: relative;
     }
 
     h1 {
@@ -26,19 +28,31 @@
       margin-bottom: 20px;
     }
 
-    p {
-      font-size: 1.1em;
-      margin-bottom: 25px;
-      max-width: 600px;
-      color: #555;
+    .images-container {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
-    input[type="text"] {
-      padding: 12px;
-      width: 250px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-bottom: 20px;
+    .image-box {
+      border: 3px solid transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: border-color 0.3s;
+      max-width: 150px;
+    }
+
+    .image-box.selected {
+      border-color: #b22222;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      user-select: none;
     }
 
     button {
@@ -50,6 +64,7 @@
       font-weight: 600;
       cursor: pointer;
       transition: background-color 0.3s;
+      margin-top: 10px;
     }
 
     button:hover {
@@ -58,12 +73,12 @@
 
     .error {
       color: red;
-      margin-top: 10px;
+      margin-top: 15px;
     }
 
     .success {
       color: green;
-      margin-top: 10px;
+      margin-top: 15px;
     }
 
     footer {
@@ -71,37 +86,69 @@
       bottom: 20px;
       font-size: 0.9em;
       color: #aaa;
+      width: 100%;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h1>Énigme 2</h1>
-  <p>Devine la bonne réponse à cette énigme romantique :</p>
-  <p><em>[Mettre ici le texte de l'énigme]</em></p>
+  <h1>Énigme 3</h1>
+  <p>Choisis ma photo préférée parmi ces 4 images.</p>
 
-  <input type="text" id="reponse" placeholder="Ta réponse..." />
-  <br />
-  <button onclick="verifierReponse()">Valider</button>
+  <div class="images-container">
+    <div class="image-box" data-name="oui">
+      <img src="images/enigme_3/oui.jpg" alt="Photo préférée" />
+    </div>
+    <div class="image-box" data-name="non1">
+      <img src="images/enigme_3/non1.jpg" alt="Photo 1" />
+    </div>
+    <div class="image-box" data-name="non2">
+      <img src="images/enigme_3/non2.jpg" alt="Photo 2" />
+    </div>
+    <div class="image-box" data-name="non3">
+      <img src="images/enigme_3/non3.jpg" alt="Photo 3" />
+    </div>
+  </div>
+
+  <button onclick="validerChoix()">Valider</button>
+
   <div id="message" class="error"></div>
 
-  <footer>Tu progresses petit à petit vers la récompense...</footer>
+  <footer>Plus que quelques énigmes avant la surprise finale...</footer>
 
   <script>
-    function verifierReponse() {
-      const bonneReponse = "ok"; // à personnaliser
-      const saisie = document.getElementById("reponse").value.trim().toLowerCase();
-      const message = document.getElementById("message");
+    let selection = null;
+    const boxes = document.querySelectorAll('.image-box');
+    const message = document.getElementById('message');
 
-      if (saisie === bonneReponse) {
+    boxes.forEach(box => {
+      box.addEventListener('click', () => {
+        boxes.forEach(b => b.classList.remove('selected'));
+        box.classList.add('selected');
+        selection = box.getAttribute('data-name');
+        message.textContent = '';
+        message.className = '';
+      });
+    });
+
+    function validerChoix() {
+      if (!selection) {
+        message.className = 'error';
+        message.textContent = 'Merci de sélectionner une photo avant de valider.';
+        return;
+      }
+      const bonneReponse = 'oui';
+
+      if (selection === bonneReponse) {
+        message.className = 'success';
+        message.textContent = 'Bonne réponse ! Redirection...';
         const progress = JSON.parse(localStorage.getItem('progress')) || {};
-        progress['enigme3'] = true; // remplace X par le numéro
+        progress['enigme3'] = true;
         localStorage.setItem('progress', JSON.stringify(progress));
-        message.className = "success";
-        message.textContent = "Bonne réponse ! Redirection...";
-        setTimeout(() => window.location.href = "accueil.html", 1500);
+        setTimeout(() => window.location.href = 'accueil.html', 1500);
       } else {
-        message.className = "error";
-        message.textContent = "Essaie encore... 🧐";
+        message.className = 'error';
+        message.textContent = 'Ce n\'est pas ma photo préférée, essaie encore !';
       }
     }
   </script>
