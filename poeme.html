@@ -3,79 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Le Poème ❤️</title>
-  <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <title>Le Poème</title>
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      padding: 30px;
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Crimson Text', serif;
       background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
       color: #333;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       min-height: 100vh;
+      padding: 20px;
     }
 
     h1 {
       font-family: 'Parisienne', cursive;
       font-size: 3em;
       color: #b22222;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     .poeme {
-      max-width: 800px;
-      background-color: white;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      line-height: 1.8;
       font-size: 1.1em;
-      white-space: pre-line;
+      line-height: 1.6;
+      font-weight: 500;
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .poeme p {
+      margin-bottom: 18px;
     }
 
     .signature {
-      margin-top: 40px;
+      margin-top: 25px;
       font-style: italic;
-      color: #666;
+      color: #b22222;
+      font-size: 1.1em;
     }
   </style>
 </head>
 <body>
+
   <h1>Pour toi, mon amour ❤️</h1>
 
   <div class="poeme">
-    Dans chaque regard, une étincelle,<br>
-    Dans chaque mot, une ritournelle,<br>
-    Depuis ce jour où tout a commencé,<br>
-    Mon cœur n’a cessé de t’aimer.<br><br>
+    <p>Quand le monde s’endort et que le jour s’efface,<br>
+    Je cherche dans la nuit l’éclat de ton regard,<br>
+    Ce feu qui me rassure et danse comme un phare,<br>
+    Loin, si loin de mes bras, il traverse l’espace.</p>
 
-    Tes rires dansent dans ma mémoire,<br>
-    Tes gestes réécrivent notre histoire,<br>
-    Main dans la main, jour après jour,<br>
-    Je découvre l’infini de notre amour.<br><br>
+    <p>Ton rire est un éclat, une étoile enflammée,<br>
+    Un souffle suspendu qui danse dans mes heures,<br>
+    Même lorsque le doute ébranle notre ardeur,<br>
+    Il suffit d’un instant pour que tout soit calmé.</p>
 
-    Ce poème est le dernier secret,<br>
-    Le fruit de nos moments partagés,<br>
-    Merci d’être toi, douce lumière,<br>
-    Mon éternelle moitié, ma chère. 💖
+    <p>L'absence est un écho que mon cœur veut taire,<br>
+    Ton souvenir doux trouble le silence amer,<br>
+    Il éclaire mes nuits froides d’un éclat lointain.</p>
+
+    <p>Quand dans le creux de tes yeux brillera la douceur,<br>
+    Un souffle d’espérance apaisera mon cœur,<br>
+    Dans l’attente paisible d’un souffle incertain.</p>
   </div>
 
-  <div class="signature">– Ton amoureux</div>
+  <div class="signature">– Charles</div>
 
-  <script>
-    const enigmes = Array.from({ length: 10 }, (_, i) => `enigme${i + 1}`);
-    const progress = JSON.parse(localStorage.getItem('progress')) || {};
-    const toutFini = enigmes.every(id => progress[id]);
-
-    if (!toutFini) {
-      // Redirection douce si l’accès est non autorisé
-      alert("Tu dois d'abord résoudre toutes les énigmes 💌");
-      window.location.href = 'accueil.html';
-    }
-  </script>
 </body>
 </html>

@@ -50,7 +50,7 @@
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 1em;
-      width: 260px;
+      width: 280px;
       margin-bottom: 20px;
     }
 
@@ -89,19 +89,17 @@
   <img src="images/image3.jpg" alt="photo" class="photo" />
   <h1>Joyeux anniversaire ❤️</h1>
   <p>Entre le mot de passe pour commencer l'aventure...</p>
-  <input type="password" id="passwordInput" placeholder="Mot de passe secret" />
+  <input type="password" id="passwordInput" placeholder="Comment débuter une conversation ?" />
   <br />
   <button onclick="verifierMotDePasse()">Entrer</button>
   <div class="error" id="errorMessage"></div>
-
-  <footer>Un site secret pour une personne spéciale ✨</footer>
 
   <script>
     function verifierMotDePasse() {
       const mdp = document.getElementById("passwordInput").value;
       const message = document.getElementById("errorMessage");
 
-      if (mdp === "test") { // à personnaliser avec ton vrai mot de passe
+      if (mdp === "coucou") { // à personnaliser avec ton vrai mot de passe
         window.location.href = "accueil.html";
       } else {
         message.textContent = "Mot de passe incorrect 😢";

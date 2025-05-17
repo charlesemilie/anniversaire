@@ -3,44 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Énigme 6</title>
+  <title>Énigme 6 - Couleurs des yeux</title>
   <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
-      margin: 0;
+      margin: 0; padding: 20px;
       font-family: 'Open Sans', sans-serif;
       background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
       color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
       text-align: center;
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
-
     h1 {
       font-family: 'Parisienne', cursive;
       font-size: 2.8em;
       color: #b22222;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
-
-    p {
-      font-size: 1.1em;
-      margin-bottom: 25px;
-      max-width: 600px;
-      color: #555;
+    .row {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
     }
-
-    input[type="text"] {
-      padding: 12px;
-      width: 250px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-bottom: 20px;
+    .color-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: border-color 0.3s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
-
+    .color-circle:hover {
+      border-color: #b22222;
+    }
+    .selected {
+      border-color: #b22222 !important;
+      box-shadow: 0 0 10px 3px #b22222a0;
+    }
     button {
       padding: 12px 24px;
       border: none;
@@ -50,25 +52,18 @@
       font-weight: 600;
       cursor: pointer;
       transition: background-color 0.3s;
+      margin-top: 10px;
     }
-
     button:hover {
       background-color: #8b1a1a;
     }
-
-    .error {
-      color: red;
-      margin-top: 10px;
+    #message {
+      margin-top: 15px;
+      font-weight: 600;
+      min-height: 24px;
     }
-
-    .success {
-      color: green;
-      margin-top: 10px;
-    }
-
     footer {
-      position: absolute;
-      bottom: 20px;
+      margin-top: 40px;
       font-size: 0.9em;
       color: #aaa;
     }
@@ -76,32 +71,84 @@
 </head>
 <body>
   <h1>Énigme 6</h1>
-  <p>Devine la bonne réponse à cette énigme romantique :</p>
-  <p><em>[Mettre ici le texte de l'énigme]</em></p>
 
-  <input type="text" id="reponse" placeholder="Ta réponse..." />
-  <br />
+  <div>
+    <p><strong>Couleur 1 :</strong></p>
+    <div class="row" id="row1">
+        <div class="color-circle" data-color="bleupastel" style="background:#b0c4de;"></div>
+        <div class="color-circle" data-color="vertmenthe" style="background:#a8cbb7;"></div>
+        <div class="color-circle" data-color="grey" style="background:#dbe3ea;"></div> <!-- yeux gris -->
+        <div class="color-circle" data-color="lilac" style="background:#c8a2c8;"></div>
+        <div class="color-circle" data-color="rosepale" style="background:#e6b7b9;"></div>
+    </div>
+  </div>
+
+  <div>
+    <p><strong>Couleur 2 :</strong></p>
+    <div class="row" id="row2">
+        <div class="color-circle" data-color="hazel" style="background:#7a4b2b;"></div> <!-- noisette -->
+        <div class="color-circle" data-color="olivepastel" style="background:#b5be91;"></div>
+        <div class="color-circle" data-color="jaunepastel" style="background:#f7e38c;"></div>
+        <div class="color-circle" data-color="bleuclair" style="background:#87ceeb;"></div>
+        <div class="color-circle" data-color="grisclair" style="background:#d3d3d3;"></div>
+    </div>
+  </div>
+
   <button onclick="verifierReponse()">Valider</button>
-  <div id="message" class="error"></div>
+
+  <div id="message"></div>
 
   <footer>Tu progresses petit à petit vers la récompense...</footer>
 
   <script>
-    function verifierReponse() {
-      const bonneReponse = "ok"; // à personnaliser
-      const saisie = document.getElementById("reponse").value.trim().toLowerCase();
-      const message = document.getElementById("message");
+    let selection = {
+      row1: null,
+      row2: null
+    };
 
-      if (saisie === bonneReponse) {
+    // Fonction de sélection
+    function setupSelection(rowId) {
+      const row = document.getElementById(rowId);
+      row.querySelectorAll('.color-circle').forEach(circle => {
+        circle.addEventListener('click', () => {
+          // Deselect previous
+          row.querySelectorAll('.color-circle').forEach(c => c.classList.remove('selected'));
+          circle.classList.add('selected');
+
+          // Sauvegarder sélection
+          selection[rowId] = circle.getAttribute('data-color');
+          document.getElementById('message').textContent = '';
+        });
+      });
+    }
+
+    setupSelection('row1');
+    setupSelection('row2');
+
+    function verifierReponse() {
+      const bonneReponse = {
+        row1: 'grey',
+        row2: 'hazel'
+      };
+      const message = document.getElementById('message');
+
+      if (!selection.row1 || !selection.row2) {
+        message.style.color = 'red';
+        message.textContent = 'Sélectionne une couleur dans chaque rangée !';
+        return;
+      }
+
+      if (selection.row1 === bonneReponse.row1 && selection.row2 === bonneReponse.row2) {
+        message.style.color = 'green';
+        message.textContent = "Bravo, c'est la bonne réponse ! Redirection...";
+        // On stocke la progression
         const progress = JSON.parse(localStorage.getItem('progress')) || {};
-        progress['enigme6'] = true; // remplace X par le numéro
+        progress['enigme6'] = true;
         localStorage.setItem('progress', JSON.stringify(progress));
-        message.className = "success";
-        message.textContent = "Bonne réponse ! Redirection...";
         setTimeout(() => window.location.href = "accueil.html", 1500);
       } else {
-        message.className = "error";
-        message.textContent = "Essaie encore... 🧐";
+        message.style.color = 'red';
+        message.textContent = "Essaie encore... 😉";
       }
     }
   </script>
