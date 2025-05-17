@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Énigme 7</title>
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Parisienne', cursive;
+      font-size: 2.8em;
+      color: #b22222;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1em;
+      margin-bottom: 25px;
+      max-width: 600px;
+      color: #555;
+    }
+
+    input[type="text"] {
+      padding: 12px;
+      width: 250px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      background-color: #b22222;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #8b1a1a;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+
+    .success {
+      color: green;
+      margin-top: 10px;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9em;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>Énigme 7</h1>
+  <p>Devine la bonne réponse à cette énigme romantique :</p>
+  <p><em>[Mettre ici le texte de l'énigme]</em></p>
+
+  <input type="text" id="reponse" placeholder="Ta réponse..." />
+  <br />
+  <button onclick="verifierReponse()">Valider</button>
+  <div id="message" class="error"></div>
+
+  <footer>Tu progresses petit à petit vers la récompense...</footer>
+
+  <script>
+    function verifierReponse() {
+      const bonneReponse = "ok"; // à personnaliser
+      const saisie = document.getElementById("reponse").value.trim().toLowerCase();
+      const message = document.getElementById("message");
+
+      if (saisie === bonneReponse) {
+        const progress = JSON.parse(localStorage.getItem('progress')) || {};
+        progress['enigme7'] = true; // remplace X par le numéro
+        localStorage.setItem('progress', JSON.stringify(progress));
+        message.className = "success";
+        message.textContent = "Bonne réponse ! Redirection...";
+        setTimeout(() => window.location.href = "accueil.html", 1500);
+      } else {
+        message.className = "error";
+        message.textContent = "Essaie encore... 🧐";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,28 +1,142 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Accueil - Mon Site Anniversaire</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notre Histoire ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-family: 'Parisienne', cursive;
+      font-size: 3em;
+      margin-top: 40px;
+      color: #b22222;
+    }
+
+    p.soustitre {
+      margin-bottom: 40px;
+      font-size: 1.2em;
+      color: #555;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 0 20px;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .grid a {
+      background-color: white;
+      padding: 15px 20px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      font-weight: 600;
+      color: #b22222;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .grid a:hover {
+      background: #ffe4e1;
+      transform: scale(1.03);
+    }
+
+    .checkmark {
+        display: inline-block;
+        width: 1em;
+        text-align: center;
+    }
+
+    #btnPoeme, #btnReset {
+      margin: 30px 10px 10px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      background-color: #b22222;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #btnPoeme:hover, #btnReset:hover {
+      background-color: #8b1a1a;
+    }
+
+    #btnPoeme {
+      display: none;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #aaa;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Bienvenue sur notre site d'anniversaire ! 🎉</h1>
-    <p>Choisis une énigme pour commencer :</p>
-  </header>
+  <h1>Notre histoire ❤️</h1>
+  <p class="soustitre">Résous chaque énigme pour découvrir le poème final...</p>
 
-  <nav>
-    <ul>
-      <li><a href="enigme1.html">Énigme 1</a></li>
-      <li><a href="enigme2.html">Énigme 2</a></li>
-      <li><a href="enigme3.html">Énigme 3</a></li>
-      <!-- Ajoute ici les liens vers les autres énigmes -->
-    </ul>
-  </nav>
+  <div class="grid">
+    <a href="enigme1.html" id="link-enigme1">Énigme 1 <span class="checkmark" id="check-enigme1">✅</span></a>
+    <a href="enigme2.html" id="link-enigme2">Énigme 2 <span class="checkmark" id="check-enigme2">✅</span></a>
+    <a href="enigme3.html" id="link-enigme3">Énigme 3 <span class="checkmark" id="check-enigme3">✅</span></a>
+    <a href="enigme4.html" id="link-enigme4">Énigme 4 <span class="checkmark" id="check-enigme4">✅</span></a>
+    <a href="enigme5.html" id="link-enigme5">Énigme 5 <span class="checkmark" id="check-enigme5">✅</span></a>
+    <a href="enigme6.html" id="link-enigme6">Énigme 6 <span class="checkmark" id="check-enigme6">✅</span></a>
+    <a href="enigme7.html" id="link-enigme7">Énigme 7 <span class="checkmark" id="check-enigme7">✅</span></a>
+    <a href="enigme8.html" id="link-enigme8">Énigme 8 <span class="checkmark" id="check-enigme8">✅</span></a>
+    <a href="enigme9.html" id="link-enigme9">Énigme 9 <span class="checkmark" id="check-enigme9">✅</span></a>
+    <a href="enigme10.html" id="link-enigme10">Énigme 10 <span class="checkmark" id="check-enigme10">✅</span></a>
+  </div>
+
+  <button id="btnPoeme" onclick="window.location.href='poeme.html'">Lire le poème final ❤️</button>
+  <button id="btnReset" onclick="localStorage.clear(); location.reload()">Réinitialiser le progrès</button>
 
   <footer>
-    <p>Bonne chance et amuse-toi bien ! ❤️</p>
+    Ce site est un petit voyage dans notre histoire ✨
   </footer>
+
+  <script>
+    const enigmes = Array.from({ length: 10 }, (_, i) => `enigme${i + 1}`);
+
+    function verifierProgression() {
+      const progress = JSON.parse(localStorage.getItem('progress')) || {};
+      let toutFini = true;
+
+      enigmes.forEach(id => {
+        const check = document.getElementById(`check-${id}`);
+        if (progress[id]) {
+          check.style.display = 'inline';
+        } else {
+          check.style.display = 'none';
+          toutFini = false;
+        }
+      });
+
+      if (toutFini) {
+        document.getElementById('btnPoeme').style.display = 'inline-block';
+      }
+    }
+
+    verifierProgression();
+  </script>
 </body>
 </html>

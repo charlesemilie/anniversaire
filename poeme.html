@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Le Poème ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 30px;
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
+      color: #333;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-family: 'Parisienne', cursive;
+      font-size: 3em;
+      color: #b22222;
+      margin-bottom: 20px;
+    }
+
+    .poeme {
+      max-width: 800px;
+      background-color: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      line-height: 1.8;
+      font-size: 1.1em;
+      white-space: pre-line;
+    }
+
+    .signature {
+      margin-top: 40px;
+      font-style: italic;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>Pour toi, mon amour ❤️</h1>
+
+  <div class="poeme">
+    Dans chaque regard, une étincelle,<br>
+    Dans chaque mot, une ritournelle,<br>
+    Depuis ce jour où tout a commencé,<br>
+    Mon cœur n’a cessé de t’aimer.<br><br>
+
+    Tes rires dansent dans ma mémoire,<br>
+    Tes gestes réécrivent notre histoire,<br>
+    Main dans la main, jour après jour,<br>
+    Je découvre l’infini de notre amour.<br><br>
+
+    Ce poème est le dernier secret,<br>
+    Le fruit de nos moments partagés,<br>
+    Merci d’être toi, douce lumière,<br>
+    Mon éternelle moitié, ma chère. 💖
+  </div>
+
+  <div class="signature">– Ton amoureux</div>
+
+  <script>
+    const enigmes = Array.from({ length: 10 }, (_, i) => `enigme${i + 1}`);
+    const progress = JSON.parse(localStorage.getItem('progress')) || {};
+    const toutFini = enigmes.every(id => progress[id]);
+
+    if (!toutFini) {
+      // Redirection douce si l’accès est non autorisé
+      alert("Tu dois d'abord résoudre toutes les énigmes 💌");
+      window.location.href = 'accueil.html';
+    }
+  </script>
+</body>
+</html>
